@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[39]:
+# In[56]:
 
 
 import math
@@ -53,9 +53,11 @@ def simulatieloop(stapgrootte):
         concentratie_t_min1_1 = zout_1[stap - 1] / TANK_INHOUD1 # zoutconcentratie van tank 1
         concentratie_t_min1_2 = zout_2[stap - 1] / TANK_INHOUD2 # zoutconcentratie van tank 2
                       # vorige stap     +  stapgrootte * postieve stromingen                                         - negatieve stromingen
-        zout_1[stap] = zout_1[stap - 1] + stapgrootte * ((instroom_salt_tank1 + (concentratie_t_min1_2 * INSTROOM2_1)) - ((concentratie_t_min1_1 * UITSTROOM1_2)+(concentratie_t_min1_1 * UITSTROOM1)))
-        zout_2[stap] = zout_2[stap - 1] + stapgrootte * ((concentratie_t_min1_1 * INSTROOM1_2) - ((concentratie_t_min1_2 * UITSTROOM2_1)+ (concentratie_t_min1_2 * UITSTROOM2)))
+
+        zout_1[stap] = zout_1[stap - 1] + stapgrootte * ((instroom_salt_tank1 + (concentratie_t_min1_2 * INSTROOM2_1)) - ((concentratie_t_min1_1 * (UITSTROOM1_2 + UITSTROOM1))))
+        zout_2[stap] = zout_2[stap - 1] + stapgrootte * ((concentratie_t_min1_1 * INSTROOM1_2) - (concentratie_t_min1_2 * (UITSTROOM2_1 +  UITSTROOM2)))
     return tijd, zout_1, zout_2
+
 
 # plot
 @interact
